@@ -1,5 +1,5 @@
 // TODO: Include packages needed for this application
-//const generateMarkdown = require('generateMarkdown')
+const generateMarkdown = require('generateMarkdown')
 const inquirer = require('inquirer')
 const fs = require('fs')
 // TODO: Create an array of questions for user input
@@ -64,12 +64,49 @@ function writeToFile(fileName, data) {
     });
 }
 
+function generateREADME(data) {
+    return `# ${data.title}
+
+## Description
+${data.description}
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
+
+## Installation
+${data.installation}
+
+## Usage
+${data.usage}
+
+## License
+![License](https://img.shields.io/badge/License-${data.license}-blue.svg "License Badge")
+This application is covered under the ${data.license} license.
+
+## Contributing
+${data.contributing}
+
+## Tests
+${data.tests}
+
+## Questions
+GitHub: [${data.githubUsername}](https://github.com/${data.githubUsername})
+Email: ${data.email}
+`;
+}
+
 
 // TODO: Create a function to initialize app
 function init() {
 
     inquirer.prompt(questions).then((response) => {
-
+        const markdown = generateMarkdown(response);
+        writeToFile('test.md', markdown);
     });
 
 }
