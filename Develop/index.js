@@ -1,5 +1,4 @@
 // TODO: Include packages needed for this application
-const generateMarkdown = require('generateMarkdown')
 const inquirer = require('inquirer')
 const fs = require('fs')
 // TODO: Create an array of questions for user input
@@ -105,7 +104,7 @@ Email: ${data.email}
 function init() {
 
     inquirer.prompt(questions).then((response) => {
-        const markdown = generateMarkdown(response);
+        const markdown = generateREADME(response);
         writeToFile('test.md', markdown);
     });
 
